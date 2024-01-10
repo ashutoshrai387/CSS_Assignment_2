@@ -1,0 +1,107 @@
+// Variables
+$orange: #ff7f00;
+$blue: #0000ff;
+$black: #000000;
+$purple: #80007e;
+$green: #d8da3d;
+$white: #ffffff;
+
+// Mixins
+@mixin dashed-border($color,$size) {
+    border: $size dashed $color;
+    width: 950px;
+}
+
+// Extend
+%bordered-div {
+    padding: 10px;
+    color: $black;
+}
+
+// Styles
+body {
+    padding-left: 260px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: $purple;
+    background-color: $green;
+}
+
+ul.sidebar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 35px;
+    left: 20px;
+    width: 190px;
+
+    // Nested style for list items
+    li {
+        background: $white;
+        margin: 8px 0;
+        padding: 5px;
+
+        // Shorthand property for right border
+        border-right: 15px solid;
+
+        // Specific colors for 1st and 3rd item
+        &:nth-child(1), &:nth-child(3) {
+            border-color: $orange;
+        }
+
+        // Specific colors for 2nd and 4th item
+        &:nth-child(2), &:nth-child(4) {
+            border-color: $blue;
+        }
+    }
+}
+
+h1 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+// Bordered Lorem Ipsum Lines Styles
+.bordered-div {
+    @extend %bordered-div;
+    margin-top: 20px;
+
+    &:hover {
+        animation: bounce 0.5s infinite alternate;
+    }
+
+    // Mixin for dashed border
+    &.dashed-black {
+        @include dashed-border($black,2px);
+        text-align: left;
+    }
+
+    &.dashed-orange {
+        @include dashed-border($orange,2px);
+        text-align: right;
+        font-style: italic;
+    }
+
+    &.small-dashed-blue {
+        @include dashed-border($blue,1px);
+        text-align: center;
+        font-weight: bold;
+    }
+}
+section {
+    margin-top: 50px;
+    border-top: thin dotted;
+    padding: 10px 0;
+}
+address {
+    margin-top: 40px;
+}
+
+// Animation
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
